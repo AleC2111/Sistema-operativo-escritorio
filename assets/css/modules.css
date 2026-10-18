@@ -1,0 +1,584 @@
+/* ==========================================================================
+   MODULES.CSS - Estilos Específicos de los Módulos de Simulación del SO
+   ========================================================================== */
+
+/* Barra de herramientas / controles de simulación */
+.sim-toolbar {
+  background: linear-gradient(to bottom, #f7fafd, #e3ecf5);
+  border-bottom: 1px solid #b3c5d8;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sim-toolbar-label {
+  font-weight: 600;
+  color: #1e3a5a;
+  font-size: 11px;
+}
+
+.sim-select, .sim-input {
+  font-family: var(--font-family);
+  font-size: 11px;
+  padding: 3px 6px;
+  border: 1px solid #8ba3ba;
+  border-radius: 3px;
+  background: #ffffff;
+  color: #1e2832;
+  outline: none;
+}
+.sim-select:focus, .sim-input:focus {
+  border-color: #2b7bc4;
+  box-shadow: 0 0 4px rgba(43, 123, 196, 0.4);
+}
+
+/* Osciloscopio verde estilo Windows 7 Performance */
+.oscilloscope-container {
+  background: #031405;
+  border: 1px solid #005a0b;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.oscilloscope-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.oscilloscope-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(rgba(0, 100, 20, 0.3) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 100, 20, 0.3) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   1. MÓDULO: MÁQUINA DE ESTADOS Y GANTT
+   ========================================================================== */
+
+.state-diagram-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 8px;
+  gap: 8px;
+  background: #f4f7fb;
+  overflow: auto;
+}
+
+.state-diagram-canvas-box {
+  background: #ffffff;
+  border: 1px solid #a9bdcf;
+  border-radius: 4px;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.state-nodes-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.state-node-box {
+  position: absolute;
+  width: 105px;
+  height: 60px;
+  border-radius: 8px;
+  border: 2px solid #2b6cb0;
+  background: linear-gradient(135deg, #e6f0fa, #cfe2f7);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.state-node-box.active {
+  box-shadow: 0 0 14px rgba(49, 130, 206, 0.8);
+  border-color: #2b7bc4;
+  transform: scale(1.04);
+}
+
+.state-node-title {
+  font-weight: 700;
+  font-size: 11px;
+  color: #102a43;
+}
+
+.state-node-count {
+  font-size: 10px;
+  color: #334e68;
+  margin-top: 2px;
+}
+
+.process-chips-container {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 4px;
+  max-height: 26px;
+  overflow-y: auto;
+}
+
+.process-chip {
+  background: #2b6cb0;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  animation: popIn 0.2s ease-out;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Gráfico de Gantt */
+.gantt-section {
+  background: #ffffff;
+  border: 1px solid #a9bdcf;
+  border-radius: 4px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gantt-title {
+  font-weight: 700;
+  font-size: 11px;
+  color: #1a365d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gantt-chart-scroll {
+  overflow-x: auto;
+  border: 1px solid #cad6e2;
+  background: #fafcfe;
+  padding: 6px;
+  min-height: 55px;
+}
+
+.gantt-bar-track {
+  display: flex;
+  height: 28px;
+  align-items: stretch;
+  gap: 1px;
+}
+
+.gantt-segment {
+  min-width: 28px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  position: relative;
+  transition: width 0.15s ease;
+}
+
+/* ==========================================================================
+   2. MÓDULO: GESTIÓN DE MEMORIA Y FRAGMENTACIÓN
+   ========================================================================== */
+
+.memory-view-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  gap: 10px;
+  background: #f4f7fb;
+  overflow: auto;
+}
+
+.memory-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.memory-stat-card {
+  background: #ffffff;
+  border: 1px solid #b3c7db;
+  border-radius: 4px;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.memory-stat-label {
+  font-size: 10px;
+  color: #627d98;
+}
+
+.memory-stat-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #102a43;
+}
+
+/* Mapa visual de memoria continua */
+.memory-bar-visual {
+  height: 48px;
+  border: 1px solid #8ca6c0;
+  border-radius: 4px;
+  background: #e2e8f0;
+  display: flex;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.memory-block {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 600;
+  position: relative;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.memory-block.free {
+  background: repeating-linear-gradient(45deg, #e2e8f0, #e2e8f0 10px, #edf2f7 10px, #edf2f7 20px);
+  color: #486581;
+  border-right: 1px dashed #9fb3c8;
+}
+
+.memory-block.external-frag {
+  background: repeating-linear-gradient(45deg, #fed7d7, #fed7d7 10px, #fff5f5 10px, #fff5f5 20px);
+  color: #c53030;
+  border: 1px solid #e53e3e;
+}
+
+/* Grilla de Paginación y Marcos (Frames) */
+.paging-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #cad6e2;
+  border-radius: 4px;
+  padding: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.paging-frame {
+  height: 60px;
+  border: 1px solid #9fb3c8;
+  border-radius: 3px;
+  background: #f7fafc;
+  display: flex;
+  flex-direction: column;
+  padding: 2px 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.frame-header {
+  font-size: 8px;
+  color: #486581;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.frame-internal-frag {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: repeating-linear-gradient(45deg, #fed7d7, #fed7d7 5px, #fff5f5 5px, #fff5f5 10px);
+  border-top: 1px dashed #e53e3e;
+  font-size: 7px;
+  color: #9b2c2c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   3. MÓDULO: SINCRONIZACIÓN Y CONCURRENCIA
+   ========================================================================== */
+
+.sync-view-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  gap: 10px;
+  background: #f4f7fb;
+  overflow: auto;
+}
+
+/* Productor - Consumidor */
+.buffer-track-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #b3c5d8;
+  border-radius: 4px;
+  padding: 14px;
+}
+
+.buffer-slots {
+  display: flex;
+  gap: 6px;
+}
+
+.buffer-slot {
+  width: 44px;
+  height: 44px;
+  border: 2px dashed #9fb3c8;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #334e68;
+  background: #f8fafc;
+  transition: all 0.2s;
+}
+
+.buffer-slot.occupied {
+  border-style: solid;
+  border-color: #2b6cb0;
+  background: linear-gradient(135deg, #3182ce, #2b6cb0);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(43, 108, 176, 0.4);
+}
+
+/* Filósofos Comensales */
+.philosophers-table-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto;
+  background: radial-gradient(circle, #e2e8f0 40%, #cbd5e0 70%);
+  border-radius: 50%;
+  border: 4px solid #718096;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.philosopher-seat {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #4a5568;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.philosopher-seat.thinking { background: #3182ce; }
+.philosopher-seat.hungry { background: #d69e2e; animation: pulseHungry 1s infinite; }
+.philosopher-seat.eating { background: #38a169; box-shadow: 0 0 12px #38a169; }
+
+@keyframes pulseHungry {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.chopstick {
+  position: absolute;
+  width: 6px;
+  height: 26px;
+  background: #cbd5e0;
+  border-radius: 3px;
+  border: 1px solid #718096;
+  transition: all 0.2s ease;
+}
+
+.chopstick.taken {
+  background: #e53e3e;
+  border-color: #9b2c2c;
+  box-shadow: 0 0 6px #e53e3e;
+}
+
+/* ==========================================================================
+   4. MÓDULO: CONTROL DE HARDWARE Y PERIFÉRICOS
+   ========================================================================== */
+
+.hardware-view-wrapper {
+  display: flex;
+  height: 100%;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.hardware-tree-pane {
+  width: 220px;
+  border-right: 1px solid #cad6e2;
+  background: #f8fafc;
+  padding: 8px;
+  overflow-y: auto;
+}
+
+.hardware-tree-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+  color: #1e293b;
+}
+
+.hardware-tree-item:hover {
+  background: #e2e8f0;
+}
+
+.hardware-tree-item.selected {
+  background: #cce8ff;
+  font-weight: 600;
+}
+
+.hardware-detail-pane {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Simulación de Disco Rígido */
+.disk-simulator-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.disk-platter-visual {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #64748b 20%, #334155 60%, #1e293b 90%);
+  border: 2px solid #94a3b8;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.disk-arm-head {
+  position: absolute;
+  width: 50px;
+  height: 4px;
+  background: #cbd5e1;
+  border-radius: 2px;
+  top: 50%;
+  left: 20%;
+  transform-origin: left center;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   5. MÓDULO: FLUJO DEL NÚCLEO (KERNEL BUS & SYSCALLS)
+   ========================================================================== */
+
+.kernel-flow-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0d1b2a;
+  color: #e0e1dd;
+  padding: 10px;
+  gap: 8px;
+  overflow: auto;
+}
+
+.bus-architecture-diagram {
+  background: #1b263b;
+  border: 1px solid #415a77;
+  border-radius: 6px;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bus-packet {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00f2fe;
+  box-shadow: 0 0 8px #4facfe, 0 0 14px #00f2fe;
+  pointer-events: none;
+}
+
+.syslog-terminal {
+  background: #080f18;
+  border: 1px solid #283e56;
+  border-radius: 4px;
+  padding: 8px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 11px;
+  color: #64d8cb;
+  height: 130px;
+  overflow-y: auto;
+  line-height: 1.4;
+}
+
+.syslog-line {
+  margin-bottom: 2px;
+}
+.syslog-time { color: #8892b0; margin-right: 6px; }
+.syslog-event { color: #ffffff; }
+.syslog-tag-syscall { color: #f6ad55; font-weight: 600; }
+.syslog-tag-irq { color: #fc8181; font-weight: 600; }
+.syslog-tag-dispatch { color: #68d391; font-weight: 600; }

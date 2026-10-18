@@ -1,0 +1,379 @@
+/* ==========================================================================
+   AERO-THEME.CSS - Sistema de Diseño Windows 7 Aero Glass
+   ========================================================================== */
+
+:root {
+  --aero-glass-bg: rgba(220, 235, 252, 0.52);
+  --aero-glass-inactive: rgba(230, 240, 250, 0.35);
+  --aero-glass-border: rgba(255, 255, 255, 0.65);
+  --aero-glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.25);
+  --aero-blur: blur(14px) saturate(180%);
+  
+  --taskbar-bg: rgba(14, 38, 64, 0.75);
+  --taskbar-border: rgba(255, 255, 255, 0.35);
+  
+  --win-blue-1: #1f6b9c;
+  --win-blue-2: #0e3b62;
+  --win-accent: #2a82da;
+  --win-highlight: #4fa4f4;
+  --win-green: #107c10;
+  --win-red: #d9383a;
+  
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-base: 12px;
+  
+  --window-body-bg: #f0f4f9;
+  --window-card-bg: #ffffff;
+  --text-dark: #1e1e1e;
+  --text-muted: #5a6470;
+  --border-light: #c0cdd8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--text-dark);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  background-color: #0b2038;
+}
+
+/* Scrollbar estilo Windows 7 */
+::-webkit-scrollbar {
+  width: 13px;
+  height: 13px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f4f7;
+  border-left: 1px solid #d4dce4;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #dbe4ee, #bccad8);
+  border: 1px solid #99a8b8;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #c6d9ea, #9fc2e2);
+  border-color: #5c8ebd;
+}
+
+/* Efectos de cristal Aero */
+.aero-glass {
+  background: var(--aero-glass-bg);
+  backdrop-filter: var(--aero-blur);
+  -webkit-backdrop-filter: var(--aero-blur);
+  border: 1px solid var(--aero-glass-border);
+  box-shadow: var(--aero-glass-shadow);
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.aero-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.05) 100%);
+  pointer-events: none;
+}
+
+/* Botones estándar Aero */
+.aero-btn {
+  font-family: var(--font-family);
+  font-size: 11px;
+  padding: 4px 12px;
+  border: 1px solid #8e9dae;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, #fcfdff 0%, #e2eaf3 50%, #d4e0ee 100%);
+  color: #1e2832;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: all 0.12s ease-in-out;
+}
+
+.aero-btn:hover {
+  border-color: #3c7fb1;
+  background: linear-gradient(to bottom, #eaf6fd 0%, #bee3fd 50%, #a4d5fd 100%);
+  box-shadow: 0 0 5px rgba(60, 127, 177, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.aero-btn:active {
+  background: linear-gradient(to bottom, #98cffb 0%, #bee3fd 100%);
+  border-color: #2c628b;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.aero-btn.primary {
+  border-color: #276a9c;
+  background: linear-gradient(to bottom, #e4f3fd 0%, #a8d5fb 50%, #7dbbf3 100%);
+  font-weight: 600;
+}
+.aero-btn.danger {
+  border-color: #b33939;
+  background: linear-gradient(to bottom, #fde8e8 0%, #f7b2b2 50%, #ef8585 100%);
+  color: #5c1111;
+}
+
+/* Tabs estilo Windows 7 */
+.aero-tabs {
+  display: flex;
+  border-bottom: 1px solid #a0b2c6;
+  padding: 0 6px;
+  gap: 2px;
+  background: #e4ecf4;
+}
+
+.aero-tab {
+  padding: 5px 14px;
+  border: 1px solid #b8c8d8;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(to bottom, #f0f5fa, #dce6f0);
+  font-size: 11px;
+  color: #334455;
+  cursor: pointer;
+  margin-bottom: -1px;
+  transition: all 0.1s ease;
+}
+
+.aero-tab:hover {
+  background: linear-gradient(to bottom, #ffffff, #eaf2fb);
+  color: #112233;
+}
+
+.aero-tab.active {
+  background: #ffffff;
+  border-color: #8da4be;
+  border-top: 2px solid #3388dd;
+  font-weight: 600;
+  color: #0b1f33;
+  z-index: 2;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Tablas estilo Windows 7 Task Manager */
+.aero-table-container {
+  border: 1px solid #9bb0c4;
+  background: #ffffff;
+  overflow: auto;
+  border-radius: 2px;
+}
+
+.aero-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.aero-table th {
+  background: linear-gradient(to bottom, #f9fbfd 0%, #e6eef5 100%);
+  border-bottom: 1px solid #b0c2d3;
+  border-right: 1px solid #d0dee8;
+  padding: 4px 8px;
+  text-align: left;
+  font-weight: 600;
+  color: #2b3e50;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.aero-table td {
+  padding: 3px 8px;
+  border-bottom: 1px solid #edf2f7;
+  border-right: 1px solid #f4f7f9;
+  white-space: nowrap;
+}
+
+.aero-table tr:hover td {
+  background: #eef6fd;
+}
+
+.aero-table tr.selected td {
+  background: #cce8ff;
+  outline: 1px solid #99d1ff;
+  color: #002244;
+}
+
+/* Progress bar estilo Windows 7 con brillo */
+.aero-progress {
+  height: 16px;
+  background: #e6ebef;
+  border: 1px solid #9fb2c5;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.aero-progress-bar {
+  height: 100%;
+  background: linear-gradient(to bottom, #8ee16c 0%, #56be2e 50%, #3ca018 100%);
+  border-right: 1px solid #2e8612;
+  position: relative;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.aero-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.1));
+}
+
+.aero-progress-bar.warning {
+  background: linear-gradient(to bottom, #fedb66 0%, #f7b524 50%, #dc9200 100%);
+  border-right-color: #b77900;
+}
+
+.aero-progress-bar.danger {
+  background: linear-gradient(to bottom, #fc8a8a 0%, #e63939 50%, #bf1b1b 100%);
+  border-right-color: #9c1010;
+}
+
+/* Insignias de estado (Badges) */
+.aero-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.badge-ready { background: #e0f2fe; color: #0284c7; border-color: #bae6fd; }
+.badge-running { background: #dcfce7; color: #16a34a; border-color: #bbf7d0; }
+.badge-blocked { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+.badge-new { background: #fef3c7; color: #d97706; border-color: #fde68a; }
+.badge-terminated { background: #f1f5f9; color: #64748b; border-color: #e2e8f0; }
+
+/* Groupbox de Windows 7 */
+.aero-groupbox {
+  border: 1px solid #b8cbdb;
+  border-radius: 4px;
+  padding: 10px 12px;
+  margin-top: 8px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.7);
+}
+.aero-groupbox legend {
+  font-weight: 600;
+  color: #1a446c;
+  padding: 0 6px;
+  font-size: 11px;
+}
+
+/* Sistema de Notificaciones Toast */
+.notification-container {
+  position: fixed;
+  bottom: 50px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.toast-notification {
+  pointer-events: auto;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.98), rgba(245, 250, 255, 0.95));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 12px 16px;
+  min-width: 280px;
+  max-width: 380px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  animation: toastSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.toast-notification.removing {
+  animation: toastSlideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.toast-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.toast-title {
+  font-weight: 600;
+  font-size: 12px;
+  color: #1a365d;
+  margin-bottom: 2px;
+}
+
+.toast-message {
+  font-size: 11px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.toast-success .toast-icon { color: #16a34a; }
+.toast-info .toast-icon { color: #0284c7; }
+.toast-warning .toast-icon { color: #d97706; }
+.toast-error .toast-icon { color: #dc2626; }
+
+.toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #38bdf8, #0284c7);
+  animation: toastProgress 4s linear forwards;
+}
+
+@keyframes toastProgress {
+  from { width: 100%; }
+  to { width: 0%; }
+}

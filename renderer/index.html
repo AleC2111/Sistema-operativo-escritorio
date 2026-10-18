@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AeroOS - Simulador de Sistema Operativo</title>
+  <!-- Hojas de estilo de la interfaz Windows 7 Aero -->
+  <link rel="stylesheet" href="../assets/css/aero-theme.css">
+  <link rel="stylesheet" href="../assets/css/desktop.css">
+  <link rel="stylesheet" href="../assets/css/windows.css">
+  <link rel="stylesheet" href="../assets/css/modules.css">
+</head>
+<body>
+  <!-- CONTENEDOR PRINCIPAL DEL ESCRITORIO -->
+  <div id="desktop" class="wallpaper-aurora">
+    <!-- Iconos del Escritorio -->
+    <div id="desktop-icons"></div>
+
+    <!-- Gadgets de Escritorio (Esquina Superior Derecha) -->
+    <div id="desktop-gadgets"></div>
+
+    <!-- Fantasma de previsualización para Aero Snap -->
+    <div class="snap-preview" id="snap-preview"></div>
+
+    <!-- Menú Contextual (Clic Derecho en el Escritorio) -->
+    <div id="desktop-context-menu">
+      <div class="ctx-item" id="ctx-refresh"><span>🔄</span> Actualizar</div>
+      <div class="ctx-separator"></div>
+      <div class="ctx-item" id="ctx-add-app"><span>📌</span> Colocar app en escritorio...</div>
+      <div class="ctx-item" id="ctx-new-proc"><span>➕</span> Crear Proceso...</div>
+      <div class="ctx-item" id="ctx-taskmgr"><span>📈</span> Adm. de Tareas</div>
+      <div class="ctx-separator"></div>
+      <div class="ctx-item" id="ctx-personalize"><span>🎨</span> Personalizar Fondo...</div>
+    </div>
+  </div>
+
+  <!-- MENÚ INICIO (START MENU) -->
+  <div id="start-menu">
+    <div class="start-menu-body">
+      <!-- Panel Izquierdo: Lista de Aplicaciones -->
+      <div class="start-menu-left"></div>
+
+      <!-- Panel Derecho: Accesos y Usuario -->
+      <div class="start-menu-right">
+        <div class="user-avatar-container">
+          <div class="user-avatar">OS</div>
+          <span class="user-name">Estudiante</span>
+        </div>
+        <div class="start-right-item" id="menu-btn-docs"><span>📄</span> Documentos</div>
+        <div class="start-right-item" id="menu-btn-pics"><span>🖼️</span> Imágenes</div>
+        <div class="start-right-item" id="menu-btn-music"><span>🎵</span> Música</div>
+        <div class="start-right-item" id="menu-btn-team"><span>💻</span> Mi Equipo</div>
+        <div class="start-right-item" id="menu-btn-panel"><span>⚙️</span> Personalizar</div>
+        <div class="start-right-item" id="menu-btn-cli"><span>⬛</span> Consola CMD</div>
+      </div>
+    </div>
+
+    <!-- Pie del Menú Inicio: Búsqueda y Botones de Energía -->
+    <div class="start-menu-footer">
+      <div class="start-search-box">
+        <svg viewBox="0 0 16 16" width="12" height="12" fill="#718096">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+        <input class="start-search-input" type="text" placeholder="Buscar programas y archivos..." />
+      </div>
+      <div class="shutdown-btn-group">
+        <button class="aero-btn shutdown-btn" id="start-restart-btn">Reiniciar SO</button>
+        <button class="aero-btn shutdown-arrow" id="start-shutdown-btn" title="Apagar">⏻</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BARRA DE TAREAS (TASKBAR) -->
+  <div id="taskbar">
+    <!-- Botón / Orbe de Inicio Original (Aero Orbit Core) -->
+    <div id="start-button" title="Inicio de AeroOS">
+      <div class="start-orb">
+        <svg viewBox="0 0 28 28" width="24" height="24">
+          <defs>
+            <radialGradient id="orbGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="40%" stop-color="#38bdf8" />
+              <stop offset="100%" stop-color="#0284c7" />
+            </radialGradient>
+            <linearGradient id="ringGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#bae6fd" />
+              <stop offset="100%" stop-color="#0284c7" />
+            </linearGradient>
+            <linearGradient id="ringGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#7dd3fc" />
+              <stop offset="100%" stop-color="#0369a1" />
+            </linearGradient>
+          </defs>
+          <!-- Anillos Orbitales Vectoriales en 3D -->
+          <ellipse cx="14" cy="14" rx="11" ry="4.2" fill="none" stroke="url(#ringGrad1)" stroke-width="1.8" transform="rotate(-30 14 14)" opacity="0.9" />
+          <ellipse cx="14" cy="14" rx="11" ry="4.2" fill="none" stroke="url(#ringGrad2)" stroke-width="1.8" transform="rotate(35 14 14)" opacity="0.9" />
+          <!-- Núcleo Central de Energía / Sistema Operativo -->
+          <circle cx="14" cy="14" r="5" fill="url(#orbGlow)" />
+          <circle cx="12.5" cy="12.5" r="1.6" fill="#ffffff" opacity="0.95" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Tareas abiertas / Iconos de aplicaciones -->
+    <div id="taskbar-apps"></div>
+
+    <!-- Bandeja del Sistema (System Tray) -->
+    <div id="system-tray">
+      <!-- Icono de Sonido -->
+      <div class="tray-icon" id="tray-sound-btn" title="Altavoces / Audio">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="#ffffff">
+          <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.47 8.47 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+          <path d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707z"/>
+          <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z"/>
+        </svg>
+      </div>
+
+      <!-- Reloj en tiempo real -->
+      <div class="tray-clock" id="tray-clock" title="Fecha y Hora">
+        <span class="tray-clock-time">12:00</span>
+        <span class="tray-clock-date">12/10/2026</span>
+      </div>
+
+      <!-- Botón Aero Peek Mostrar Escritorio -->
+      <div id="show-desktop-btn" title="Mostrar escritorio"></div>
+    </div>
+  </div>
+
+  <!-- SCRIPT PRINCIPAL DE LA APLICACIÓN -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>

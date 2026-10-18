@@ -1,0 +1,25 @@
+{
+  "name": "aeroos",
+  "version": "1.0.0",
+  "description": "Simulador de Sistema Operativo con interfaz Windows 7 Aero desarrollado en Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron --no-sandbox .",
+    "test": "node -e \"const fs = require('fs'), path = require('path'), { execSync } = require('child_process'); function g(d){ let r=[]; fs.readdirSync(d).forEach(f=>{ if(f==='node_modules')return; const p=path.join(d,f); if(fs.statSync(p).isDirectory()) r=r.concat(g(p)); else if(f.endsWith('.js')) r.push(p); }); return r; } g('.').forEach(f=>execSync('node --check \\\"'+f+'\\\"')); console.log('Syntax OK: Todos los archivos son válidos.');\""
+  },
+  "keywords": [
+    "operating-system",
+    "simulator",
+    "windows-7",
+    "aero",
+    "electron",
+    "cpu-scheduling",
+    "memory-management",
+    "process-synchronization"
+  ],
+  "author": "Sistemas Operativos 8vo Semestre",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^44.7.0"
+  }
+}

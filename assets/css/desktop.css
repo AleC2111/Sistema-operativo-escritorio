@@ -1,0 +1,669 @@
+/* ==========================================================================
+   DESKTOP.CSS - Escritorio, Barra de Tareas, Menú Inicio, Gadgets y Wallpapers
+   ========================================================================== */
+
+#desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 40px; /* Espacio para la barra de tareas */
+  background: radial-gradient(circle at 50% 30%, #2989d8 0%, #17548b 45%, #0b2542 90%);
+  background-size: cover;
+  overflow: hidden;
+  user-select: none;
+  transition: background 0.5s ease;
+}
+
+/* EFECTOS Y TEMAS DE FONDOS DE PANTALLA MEJORADOS */
+#desktop.wallpaper-aurora {
+  background: radial-gradient(circle at 50% 25%, #38bdf8 0%, #1d72b8 40%, #0d3868 75%, #051930 100%);
+}
+
+#desktop.wallpaper-harmony {
+  background: linear-gradient(to bottom, #1377cc 0%, #3ca0e8 42%, #68c740 68%, #328a22 100%);
+}
+
+#desktop.wallpaper-deep-night {
+  background: radial-gradient(circle at 65% 20%, #7c3aed 0%, #3b0764 40%, #1e0538 70%, #080210 100%);
+}
+
+#desktop.wallpaper-sunset {
+  background: linear-gradient(135deg, #311042 0%, #831843 30%, #be185d 55%, #f97316 85%, #facc15 100%);
+}
+
+#desktop.wallpaper-cyber {
+  background: radial-gradient(circle at 50% 50%, #083344 0%, #041f2a 55%, #020e14 100%);
+  background-image: 
+    linear-gradient(rgba(6, 182, 212, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+#desktop.wallpaper-rose {
+  background: radial-gradient(circle at 40% 30%, #f472b6 0%, #be185d 45%, #701a75 80%, #3b0764 100%);
+}
+
+#desktop.wallpaper-custom {
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Wallpapers específicos para usuarios */
+#desktop.wallpaper-nature {
+  background: linear-gradient(135deg, #059669 0%, #10b981 30%, #34d399 55%, #6ee7b7 85%, #a7f3d0 100%);
+}
+
+#desktop.wallpaper-dark {
+  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 55%, #020617 100%);
+}
+}
+
+/* Contenedor de iconos de escritorio con posicionamiento libre */
+#desktop-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.desktop-icon {
+  position: absolute;
+  pointer-events: auto;
+  width: 76px;
+  height: 74px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 3px;
+  border: 1px solid transparent;
+  transition: background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+  user-select: none;
+}
+
+.desktop-icon.dragging {
+  opacity: 0.85;
+  z-index: 100;
+  cursor: move !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px rgba(180, 220, 255, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.desktop-icon.selected {
+  background: rgba(140, 200, 255, 0.38);
+  border-color: rgba(100, 180, 255, 0.75);
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.55);
+}
+
+.desktop-icon-img {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.desktop-icon-label {
+  margin-top: 2px;
+  font-size: 11px;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 3px #000;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 72px;
+  letter-spacing: -0.2px;
+}
+
+/* ==========================================================================
+   BARRA DE TAREAS (TASKBAR)
+   ========================================================================== */
+
+#taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(30, 70, 110, 0.82) 0%, rgba(12, 36, 62, 0.88) 50%, rgba(6, 20, 36, 0.94) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  display: flex;
+  align-items: center;
+  z-index: 99999;
+}
+
+/* Orbe de Inicio (Start Orb) */
+#start-button {
+  width: 48px;
+  height: 48px;
+  margin-top: -8px;
+  margin-left: 6px;
+  margin-right: 8px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+#start-button:hover {
+  transform: scale(1.06);
+}
+
+.start-orb {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #5ed5ff 0%, #1f82d2 45%, #0f467a 80%, #0a2e52 100%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), inset 0 2px 3px rgba(255, 255, 255, 0.95), inset 0 -3px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.start-orb::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 6px;
+  width: 28px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.05));
+}
+
+#start-button:hover .start-orb {
+  box-shadow: 0 0 16px rgba(80, 200, 255, 0.95), 0 2px 8px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 1);
+}
+
+/* Tareas abiertas / Botones de la barra */
+#taskbar-apps {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  height: 100%;
+  overflow-x: auto;
+  padding: 0 4px;
+}
+
+.taskbar-item {
+  height: 34px;
+  min-width: 40px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 11px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.taskbar-item:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 8px rgba(160, 215, 255, 0.5);
+}
+
+.taskbar-item.active {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), rgba(180, 220, 255, 0.2));
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.taskbar-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: #6cd1ff;
+  box-shadow: 0 0 4px #4fc3f7;
+}
+
+.taskbar-item-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.taskbar-item-title {
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Bandeja del Sistema (System Tray) */
+#system-tray {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 6px;
+  padding: 0 6px 0 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.tray-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.1s;
+}
+
+.tray-icon:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.tray-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.tray-clock:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tray-clock-time {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tray-clock-date {
+  font-size: 10px;
+  color: #d8e6f4;
+}
+
+/* Botón Aero Peek Mostrar Escritorio */
+#show-desktop-btn {
+  width: 12px;
+  height: 38px;
+  margin-left: 4px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#show-desktop-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+/* ==========================================================================
+   MENÚ INICIO (START MENU)
+   ========================================================================== */
+
+#start-menu {
+  position: absolute;
+  bottom: 45px;
+  left: 6px;
+  width: 440px;
+  height: 500px;
+  border-radius: 8px 8px 0 0;
+  display: none;
+  flex-direction: column;
+  z-index: 100000;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.45);
+  overflow: hidden;
+}
+
+#start-menu.open {
+  display: flex;
+  animation: startMenuIn 0.16s ease-out;
+}
+
+@keyframes startMenuIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.start-menu-body {
+  flex: 1;
+  display: flex;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* Panel Izquierdo: Programas */
+.start-menu-left {
+  flex: 1;
+  padding: 8px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-right: 1px solid #d4e0ec;
+}
+
+.start-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.1s;
+}
+
+.start-item:hover {
+  background: #eaf4fd;
+  border-color: #badcfc;
+}
+
+.start-item-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.start-item-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.start-item-title {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 11px;
+}
+
+.start-item-desc {
+  font-size: 10px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+/* Panel Derecho: Lugares y accesos */
+.start-menu-right {
+  width: 145px;
+  background: linear-gradient(to bottom, #dbe9f6, #c5d8ea);
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-avatar-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  background: #1f6b9c;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.user-name {
+  font-weight: 700;
+  font-size: 11px;
+  color: #102a43;
+}
+
+.start-right-item {
+  padding: 5px 8px;
+  font-size: 11px;
+  color: #1a365d;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.start-right-item:hover {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Pie del Menú Inicio: Búsqueda y Botón Apagar */
+.start-menu-footer {
+  height: 44px;
+  background: linear-gradient(to bottom, #d6e4f2, #bccfe4);
+  border-top: 1px solid #a9c1d9;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 10px;
+}
+
+.start-search-box {
+  flex: 1;
+  height: 26px;
+  background: #ffffff;
+  border: 1px solid #7c9bb8;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 6px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.start-search-input {
+  border: none;
+  outline: none;
+  font-size: 11px;
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+.shutdown-btn-group {
+  display: flex;
+  align-items: center;
+}
+
+.shutdown-btn {
+  padding: 5px 12px;
+  border-radius: 3px 0 0 3px;
+  font-weight: 600;
+}
+
+.shutdown-arrow {
+  padding: 5px 6px;
+  border-left: 1px solid #9fb3c5;
+  border-radius: 0 3px 3px 0;
+}
+
+/* ==========================================================================
+   MENÚ CONTEXTUAL DEL ESCRITORIO (CLIC DERECHO)
+   ========================================================================== */
+
+#desktop-context-menu {
+  position: absolute;
+  width: 170px;
+  background: #fbfbfb;
+  border: 1px solid #97a6b5;
+  border-radius: 4px;
+  box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.35);
+  display: none;
+  flex-direction: column;
+  padding: 3px 0;
+  z-index: 100005;
+  font-size: 11px;
+  color: #222;
+}
+
+.ctx-item {
+  padding: 5px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ctx-item:hover {
+  background: #e5f1fb;
+  color: #0b1f33;
+}
+
+.ctx-separator {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 3px 4px;
+}
+
+/* ==========================================================================
+   GADGETS DE ESCRITORIO
+   ========================================================================== */
+
+#desktop-gadgets {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.gadget-card {
+  width: 135px;
+  padding: 10px;
+  border-radius: 12px;
+  background: radial-gradient(circle at 40% 30%, rgba(255, 255, 255, 0.35) 0%, rgba(200, 220, 240, 0.18) 70%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.gadget-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  color: #e2f1ff;
+}
+
+.meter-gauge-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.dial-meter {
+  position: relative;
+  width: 52px;
+  height: 52px;
+}
+
+.dial-meter svg {
+  transform: rotate(-90deg);
+}
+
+.dial-meter-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 5;
+}
+
+.dial-meter-fill {
+  fill: none;
+  stroke: #48bb78;
+  stroke-width: 5;
+  stroke-dasharray: 144.5;
+  stroke-dashoffset: 144.5;
+  transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
+  stroke-linecap: round;
+}
+
+.dial-meter-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.dial-meter-tag {
+  font-size: 8px;
+  opacity: 0.85;
+}
+
+/* Animación giratoria para carga */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
